@@ -4,7 +4,7 @@ Kitob almashinuvni qulaylashtirish uchun loyiha
 
 ### 1. Loyiha faylini yuklang
 
-    `git clone https://github.com/mehmonov/mastava.git`
+     git clone https://github.com/mehmonov/mastava.git
 
 ### 2. Paketlarni o'rnating
     `pip install -r requirements.txt`
