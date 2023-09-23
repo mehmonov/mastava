@@ -29,12 +29,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # loyiha uchun o'rnatganapplar
     'rest_framework',
-
+    'rest_framework.authtoken',
+    'dj_rest_auth', # api orqali login qilish uchun
 
     # loyiha uchun o'zimiz ishlab chiqqan applar
     'books',
     'users',
-    
 ]
 
 MIDDLEWARE = [
@@ -110,6 +110,7 @@ USE_I18N = True
 USE_TZ = True
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -119,3 +120,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+           'rest_framework.permissions.AllowAny', #faqar ro'yhatdan o'tganlar ko'radi(IsAuthenticated), barcha ko'radi (AllowAny)
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication', # session auth. browserlar bilan ishlaganda kerak
+        'rest_framework.authentication.TokenAuthentication' # token bilan auth
+    ],
+}
