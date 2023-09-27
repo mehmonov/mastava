@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth', # api orqali login qilish uchun
-
+    'drf_yasg',
     # loyiha uchun o'zimiz ishlab chiqqan applar
     'books',
     'users',
