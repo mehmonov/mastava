@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Asosiy sahifa
+{% endblock title %}   
+
+{% block content %}
+   <main>
+
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light"><p id="word">Almashing</p>
+          </h1>
+          <p class="lead text-muted">Kitob o'qimoqchisiz, biroq hozir kitob sotib olishga imkoningiz yo'qmi?.. <br> Hizmat orqali o'zingiga eng yaqin manzildan yoki pochta orqali kitoblarni o'qishga olishingiz yoki o'qishga berishingiz mumkin. </p>
+          <p>
+            <a href="{% url "searchbook" %}" class="btn btn-primary my-2">Sinab ko'ring</a>
+            <a href="{% url "info" %}" class="btn btn-secondary my-2">Qo'llanma bilan tanishing</a>
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <div class="album py-5 bg-light">
+        <div class="container">
+    
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for last_book in last_books %}
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p class="card-text">{{last_book.desc}}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{% url "bookdetail" last_book.slug %}" type="button" class="btn btn-sm btn-outline-secondary">Ko'rish</a>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Muallifga yozish</button>
+                                </div>
+                                <small class="text-muted">
+                                  {{ last_book.created_time|date:"d-F" }}
+
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% for exchanged_book in exchanged_books %}
+                <div class="col">
+                    <div class="card shadow-sm p-2">
+                        <!-- Almashinuvda matnini qo'shing -->
+                        <p>{{exchanged_book.name}}</p>
+                        <div class="card-body">
+                            <p class="card-text">{{exchanged_book.desc}}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ko'rish</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Muallifga yozish</button>
+                                </div>
+                                <small class="text-muted">
+                                    {{ exchanged_book.swap_time }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+          </div>
+        
+          </div>
+        </div>
+      </div>
+        
+  </main>
+
+{% endblock content %}
+{% block script %}
+<script>
+    var words = ['Qidiring', 'Almashing', 'Soting'];
+var index = 1;
+
+function changeWord() {
+    var elem = document.getElementById('word');
+    elem.innerHTML = words[index];
+    index++;
+    if (index >= words.length) {
+        index = 0;
+    }
+}
+
+setInterval(changeWord, 1000); // Har sekundda so'zni o'zgartiradi
+
+</script>
+{% endblock script %}

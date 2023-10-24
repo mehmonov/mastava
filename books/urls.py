@@ -1,5 +1,8 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 urlpatterns = [
-    path('',views.AllBooks.as_view())
+    # template views
+    path('',include('books.utils.urls')),
+    # Api urls
+    path('api',views.AllBooks.as_view())
 ]

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}
+    Qidirish
+{% endblock title %}
+{% block  content  %}
+
+<div class="container">
+
+    <h2>Kitoblar ro'yhati</h2>
+
+    <form class="form-inline " action="" method="GET">
+        {{ form  }}
+        <button class="btn btn-success" type="submit">Qidirish</button>
+        </fieldset>
+    </form>
+
+    <table class="table table-bordered table-condensed">
+        <tr>
+            <th>Name</th>
+            <th>Profil</th>
+            <th>Muallif</th>
+            <th>Ijara holati</th>
+            <th>Til</th>
+            <th>Holat</th>
+        </tr>
+        {% for object in object_list %}
+        <tr>
+            <td>{{object.name}}</td>
+            <td>{{object.owner}}</td>
+            <td>{{object.author}}</td>
+            <td>
+                {% if object.bookexchange.all %}
+                    {% for exchange in object.bookexchange.all %}
+                        {% if exchange.status %}
+                            Almashilgan | {{exchange.swap_time | date:"d-F"  }}
+                        {% else %}
+                            Almashish mumkin
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                   Birinchi bo'ling
+                {% endif %}
+            </td>
+            <td>{{object.lang}}</td>
+            <td>
+                {% if object.to_sell %}
+                    <a href="" class="btn btn-info">Sotiladi</a>
+                {% endif %}
+                {% if object.swap %}
+                    <a href="" class="btn btn-primary">Ijara</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        
+        
+    </table>
+
+    
+
+</div>
+
+{% endblock  %}
+
+
